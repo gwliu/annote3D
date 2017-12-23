@@ -113,8 +113,8 @@ def getfiles(filepath):
     files = [join(filepath, f) for f in listdir(filepath) if isfile(join(filepath, f))]
     files.sort()
     return files
-def getlsmfiles(filepath):
-    files = [join(filepath, f) for f in listdir(filepath) if f[-3:] == 'lsm']
+def gettiffiles(filepath):
+    files = [join(filepath, f) for f in listdir(filepath) if f[-3:] == 'tif']
     files.sort()
     return files
 def getmaxima(dog_image):
@@ -173,9 +173,9 @@ def samplefromindex(dog_list, positive_labels, image, xysize, sample_size, xz_ra
 
 
 #batch process
-def batch_label(path = 'default path'):
-    if path == 'default path':
-        path = '/home/yingtao/Desktop/annote3D/' + "janelia_gal4"
+def batch_label(inputpath = 'default path'):
+    if inputpath == 'default path':
+        inputpath = '/home/yingtao/Desktop/annote3D/' + "janelia_gal4"
     labels = []
     plabels_indiv = []
     samples_indiv = []
@@ -183,7 +183,7 @@ def batch_label(path = 'default path'):
     xz_ratio = 4
     sample_size = (sample_xysize//xz_ratio * 2 + 1)*(sample_xysize*2 + 1)**2
     samples = np.empty([0, sample_size])
-    janl_lsms = getlsmfiles(mypath + "janelia_gal4")
+    janl_lsms = gettiffiles(inputpath)
     stopflag = 0
     for i, janl_lsm in enumerate(janl_lsms):
         if stopflag == 1:
@@ -234,9 +234,9 @@ def batch_label(path = 'default path'):
         np.savetxt(mypath + 'labeled_samples_file/' + str(i) + 'labels.txt', labels_indiv)
     return samples, labels
 
-def batch_test(path = 'default path'):
-    if path == 'default path':
-        path = '/home/yingtao/Desktop/annote3D/' + "janelia_gal4"
+def batch_test(inputpath = 'default path'):
+    if inputpath == 'default path':
+        inputpath = '/home/yingtao/Desktop/annote3D/' + "janelia_gal4"
     labels = []
     plabels_indiv = []
     samples_indiv = []
@@ -244,7 +244,7 @@ def batch_test(path = 'default path'):
     xz_ratio = 4
     sample_size = (sample_xysize//xz_ratio * 2 + 1)*(sample_xysize*2 + 1)**2
     samples = []
-    janl_lsms = getlsmfiles(mypath + "janelia_gal4")
+    janl_lsms = gettiffiles(inputpath)
     stopflag = 0
     for i, janl_lsm in enumerate(janl_lsms):
         if stopflag == 1:

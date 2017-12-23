@@ -37,29 +37,29 @@ def prepro(janllsm, flag = 'S'):
         blue_CNS[i] = CNS_mask * blue[i]
         green_CNS[i] = CNS_mask * green[i]
         CNS[i] = CNS_mask
-    xcenter = center_of_mass(CNS)
-    VNC = CNS[:,math.ceil(xcenter[1]):,math.ceil(xcenter[2]) - 300:math.ceil(xcenter[2]) + 300]
-    VNC_blue = blue_CNS[:,math.ceil(xcenter[1]):,math.ceil(xcenter[2]) - 300:math.ceil(xcenter[2]) + 300]
-    VNC_green = green_CNS[:,math.ceil(xcenter[1]):,math.ceil(xcenter[2]) - 300:math.ceil(xcenter[2]) + 300]
-    kmeans = MiniBatchKMeans(n_clusters=4, batch_size=int(10e5), verbose=1).fit(VNC_blue.reshape(-1,1))
+    terminal_range = np.s_[:,1100:,495-300:495+300]
+    terminal = CNS[terminal_range]
+    terminal_blue = blue_CNS[terminal_range]
+    terminal_green = green_CNS[terminal_range]
+    kmeans = MiniBatchKMeans(n_clusters=4, batch_size=int(10e5), verbose=1).fit(terminal_blue.reshape(-1,1))
     center_values = kmeans.cluster_centers_
     sorted_center = np.argsort(center_values, 0)
     lut = np.arange(4)
     lut[sorted_center] = np.arange(4).astype(int)
-    labeled = lut[kmeans.labels_].reshape(VNC_blue.shape)
+    labeled = lut[kmeans.labels_].reshape(terminal_blue.shape)
     if flag == 'F':
         labeled = np.absolute(labeled//2 - 1)
-        result = (labeled * VNC_green).astype('uint8')
+        result = (labeled * terminal_green).astype('uint8')
         io.imsave('/home/yingtao/Desktop/annote3D/image.tif', result)
-        return result, green[:,math.ceil(xcenter[1]):,math.ceil(xcenter[2]) - 300:math.ceil(xcenter[2]) + 300]
+        return result, green[terminal_range]
     else:
         median = median_filter(labeled.astype('int8'), 11)
         mask = median//2
         removed = remove_small_objects(mask, 50000)
         removed = np.absolute(removed - 1)
-        result = (removed * VNC_green).astype('uint8')
+        result = (removed * terminal_green).astype('uint8')
         io.imsave('/home/yingtao/Desktop/annote3D/image.tif', result)
-        return result, green[:,math.ceil(xcenter[1]):,math.ceil(xcenter[2]) - 300:math.ceil(xcenter[2]) + 300]
+        return result, green[terminal_range]
 
     
 
