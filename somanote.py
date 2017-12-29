@@ -1,4 +1,3 @@
-
 import numpy as np
 from math import log
 import itertools
@@ -13,6 +12,7 @@ from os import listdir
 import subprocess
 from os.path import isfile, join
 import math
+import signal
 
 
 """
@@ -20,6 +20,7 @@ Detect somata in janelia images
 
 """
 
+outputpath = '/home/yingtao/Desktop/annote3D/'
 mypath = '/home/yingtao/Desktop/annote3D/'
 desktop = '/home/yingtao/Desktop/'
 
@@ -67,7 +68,7 @@ def _discenter(x,y,xd,yd):
         return 0
 #return a ellipse sphere kernal
 def addvalue(dog_list, image):
-    xd, yd = 21, 21
+    xd, yd = 19, 19
     temp = [_discenter(x, y, xd, yd) for x in range(xd) for y in range(yd)]
     coin_kernel = np.array(temp).reshape(xd,yd)
     pixelvalue = np.array([np.sum(coin_kernel * getboxslice(image, i, xd, yd)) for i in dog_list])
@@ -92,7 +93,7 @@ def _prune_blobs(blobs, overlap):
 
 
 #calculate dog, detect peaks
-def dog_maxima(terminal, sigma, zx_ratio=4, blur_sigma=0.3, size = 8, prune_dis = 2):
+def dog_maxima(terminal, sigma, zx_ratio=4, blur_sigma=0.3, prune_dis = 2):
     s = sigma
     gaussian_images0 = ndimage.gaussian_filter(terminal, (s/4, s,s))
     gaussian_images1 = ndimage.gaussian_filter(terminal, ((s*1.3)/4, s*1.3,s*1.3))
@@ -118,11 +119,11 @@ def gettiffiles(filepath):
     files.sort()
     return files
 def getmaxima(dog_image):
-    io.imsave(mypath +'original_images/1106.tif', dog_image.astype('int16'))
+    io.imsave(outputpath +'tmp/dog.tif', dog_image.astype('int16'))
     p = subprocess.Popen(['xvfb-run','-a', desktop + "Fiji.app/./ImageJ-linux64", "-macro",
                           mypath + "macros/findmaxima.ijm"])
     p.wait()
-    onlyfiles = getfiles(mypath + "maximafile")
+    onlyfiles = getfiles(outputpath +  "tmp/maximafiles")
     maxima_data = np.empty([0,3])
     for i, files in enumerate(onlyfiles):
         temp = np.genfromtxt(files, delimiter=',')
@@ -132,14 +133,14 @@ def getmaxima(dog_image):
             continue           
         maxima_data = np.append(maxima_data, temp, axis = 0)
     dog_list = np.array([i for i in maxima_data if not math.isnan(i[1])])
-    p = subprocess.Popen("rm "+ mypath + "maximafile/*", shell = True)
+    p = subprocess.Popen("rm "+ outputpath + "tmp/maximafiles/*", shell = True)
     #order of coordinate z,x,y
     return dog_list
 
-
 #prepare sample
-def samplefromindex(dog_list, positive_labels, image, xysize, sample_size, xz_ratio):
-    samples = np.empty([0, sample_size])
+def samplefromindex(dog_list, positive_labels, unknown_labels, image, blue, red, xysize, sample_size, xz_ratio):
+    samples = np.empty([0, sample_size * 3])
+    coords = []
     labels = []
     for i, coord in enumerate(dog_list):
         coord = coord.astype(int)
@@ -158,55 +159,103 @@ def samplefromindex(dog_list, positive_labels, image, xysize, sample_size, xz_ra
         coord_slice = np.index_exp[coord[0]-xysize//xz_ratio:coord[0]+xysize//xz_ratio+1, 
                                       coord[2]-xysize:coord[2]+xysize+1,  coord[1]-xysize:coord[1]+xysize+1]
         temp = image[coord_slice].flatten()
-        if temp.shape[0] == samples.shape[1]:
+        temp1 = blue[coord_slice].flatten()
+        temp2 = red[coord_slice].flatten()
+        if temp.shape[0] == sample_size:
             temp = temp.reshape(1,-1)
-            samples = np.append(samples, temp, axis=0)
+            temp1 = temp1.reshape(1,-1)
+            temp2 = temp2.reshape(1,-1)
+            sample = np.concatenate([temp,temp1,temp2], axis = 1)
+            samples = np.append(samples,sample, axis=0)
         else:
             print(i)
             continue
+        coords.append(coord)
         if i in positive_labels:
             labels.append(1)
+        elif i in unknown_labels:
+            labels.append(2)
         else:
             labels.append(0)
-    return samples, labels
+    return samples, labels, coords
 
-
-
-#batch process
 def batch_label(inputpath = 'default path'):
     if inputpath == 'default path':
         inputpath = '/home/yingtao/Desktop/annote3D/' + "janelia_gal4"
+    print(inputpath)
     labels = []
     plabels_indiv = []
+    ulabels_indiv = []
     samples_indiv = []
+    coords_indiv = []
+    coords = []
     sample_xysize = 15
     xz_ratio = 4
     sample_size = (sample_xysize//xz_ratio * 2 + 1)*(sample_xysize*2 + 1)**2
-    samples = np.empty([0, sample_size])
+    samples = np.empty([0, sample_size*3])
     janl_lsms = gettiffiles(inputpath)
     stopflag = 0
+    nextimage = 0
     for i, janl_lsm in enumerate(janl_lsms):
         if stopflag == 1:
             break
-        image, origin_image = preprocessor.prepro(janl_lsm)
-        dog_list, dog_image = dog_maxima(image, 2, size =7)
+        print(janl_lsm)
+        flag, image, origin_image, blue, red = preprocessor.prepro(janl_lsm)
+        if flag == 0:
+            break
+        dog_list, dog_image = dog_maxima(image, sigma = 2.5)
         dog_list = addvalue(dog_list, origin_image)
         dog_list = _prune_blobs(dog_list, 10)
-        np.savetxt(mypath + 'dog_maxima', dog_list)
-        io.imsave(mypath + 'origin.tif', origin_image.astype("int16"))
+        np.savetxt(outputpath + 'tmp/dog_maxima', dog_list)
+        io.imsave(outputpath + 'tmp/origin.tif', origin_image.astype("uint8"))
         p = subprocess.Popen([desktop + "Fiji.app/./ImageJ-linux64", "-macro",
                           mypath + "macros/showcirc.ijm"])
         for temp in dog_list:
-            s = input("What's the index of circled neuron? ")
+            s = input("What's the index of circled neuron?")
             if s == 'e':
-                print('next image')
-                samples_indiv, labels_indiv = samplefromindex(dog_list, plabels_indiv, 
-                                                                          origin_image, sample_xysize, sample_size, xz_ratio)
-                samples = np.append(samples, samples_indiv, axis = 0)
-                labels.extend(labels_indiv)
-                plabels_indiv =[]
-                np.savetxt(mypath + 'tmp/' + str(i) + 'sample', samples_indiv)
-                np.savetxt(mypath + 'tmp/' + str(i) + 'labels', labels_indiv)
+                for temp2 in dog_list:
+                    s = input("What's the index of unknown case?")
+                    if s == 'e':
+                        print('next image')
+                        samples_indiv, labels_indiv, coords_indiv = samplefromindex(dog_list, plabels_indiv,
+                                                                                    ulabels_indiv, origin_image, blue,
+                                                                                    red, sample_xysize, sample_size,
+                                                                                    xz_ratio)
+                        samples = np.append(samples, samples_indiv, axis = 0)
+                        coords.extend(coords_indiv)
+                        labels.extend(labels_indiv)
+                        plabels_indiv =[]
+                        ulabels_indiv = []
+                        np.savetxt(outputpath + 'tmp/' + str(i) + 'sample', samples_indiv)
+                        np.savetxt(outputpath + 'tmp/' + str(i) + 'labels', labels_indiv)
+                        nextimage = 1
+                        break
+                    if s == 'd':
+                        print('deleteone')
+                        ulabels_indiv.pop()
+                    if s == 'stop':
+                        print('stop')
+                        samples_indiv, labels_indiv, coords_indiv = samplefromindex(dog_list, plabels_indiv,
+                                                                                    ulabels_indiv, origin_image, blue,
+                                                                                    red, sample_xysize, sample_size,
+                                                                                    xz_ratio)
+                        samples = np.append(samples, samples_indiv, axis = 0)
+                        coords.extend(coords_indiv)
+                        labels.extend(labels_indiv)
+                        plabels_indiv =[]
+                        ulabels_indiv = []
+                        stopflag = 1
+                        np.savetxt(outputpath + 'tmp/' + str(i) + 'samples', samples_indiv)
+                        np.savetxt(outputpath + 'tmp/' + str(i) + 'labels', labels_indiv)
+                        nextimage = 1
+                        break
+                    try:
+                        ulabels_indiv.append(int(s))
+                    except ValueError:
+                        print('do it again!')
+                    print("unknown + " +s+"")
+            if nextimage == 1:
+                nextimage = 0
                 break
             if s == 'd':
                 print('deleteone')
@@ -214,54 +263,65 @@ def batch_label(inputpath = 'default path'):
             if s == 'n':
                 print('neglect it')
                 break
-            if s == 'stop':
-                print('next image')
-                samples_indiv, labels_indiv = samplefromindex(dog_list, plabels_indiv, 
-                                                                          origin_image, sample_xysize, sample_size, xz_ratio)
-                samples = np.append(samples, samples_indiv, axis = 0)
-                labels.extend(labels_indiv)
-                plabels_indiv =[]
-                stopflag = 1
-                np.savetxt(mypath + 'tmp/' + str(i) + 'samples', samples_indiv)
-                np.savetxt(mypath + 'tmp/' + str(i) + 'labels', labels_indiv)
-                break
             try:
                 plabels_indiv.append(int(s))
             except ValueError:
-                print('do it again!')
+                print('do it againnnn!')
             print("neuron + " +s+"")
-        np.savetxt(mypath + 'labeled_samples_file/' + str(i) + 'samples.txt', samples_indiv)
-        np.savetxt(mypath + 'labeled_samples_file/' + str(i) + 'labels.txt', labels_indiv)
-    return samples, labels
+        np.savetxt(outputpath + 'labeled_samples_file/' + str(i) + 'samples.txt', samples_indiv)
+        np.savetxt(outputpath + 'labeled_samples_file/' + str(i) + 'labels.txt', labels_indiv)
+    return samples, labels, coords
 
+
+def alarm_handler(signum, frame):
+    raise TimeoutExpired
+
+def input_with_timeout(prompt, timeout):
+    # set signal handler
+    signal.signal(signal.SIGALRM, alarm_handler)
+    signal.alarm(timeout) # produce SIGALRM in `timeout` seconds
+
+    try:
+        return input(prompt)
+    finally:
+        signal.alarm(0) # cancel alarm
 def batch_test(inputpath = 'default path'):
     if inputpath == 'default path':
         inputpath = '/home/yingtao/Desktop/annote3D/' + "janelia_gal4"
     labels = []
     plabels_indiv = []
     samples_indiv = []
+    ulabels_indiv = []
     sample_xysize = 15
     xz_ratio = 4
     sample_size = (sample_xysize//xz_ratio * 2 + 1)*(sample_xysize*2 + 1)**2
     samples = []
     janl_lsms = gettiffiles(inputpath)
     stopflag = 0
+    s = 'n'
     for i, janl_lsm in enumerate(janl_lsms):
         if stopflag == 1:
             break
         if i == 0:
             print('next')
             continue
-        image, origin_image = preprocessor.prepro(janl_lsm)
-        dog_list, dog_image = dog_maxima(image, 2, size =7)
+        flag, image, origin_image, blue, red = preprocessor.prepro(janl_lsm)
+        if flag == 0:
+            print('wrong image size')
+            continue
+        dog_list, dog_image = dog_maxima(image, sigma = 2.5)
         dog_list = addvalue(dog_list, origin_image)
         dog_list = _prune_blobs(dog_list, 10)
-        plabels_indiv = np.ones(dog_list.shape[0])
-        samples_indiv, labels_indiv = samplefromindex(dog_list, plabels_indiv, 
-                                                                          origin_image, sample_xysize, sample_size, xz_ratio)
+        samples_indiv, labels_indiv, coords_indiv = samplefromindex(dog_list, plabels_indiv, 
+                                                                    ulabels_indiv, origin_image, blue, red, 
+                                                                    sample_xysize, sample_size, xz_ratio)
+        janl_file = janl_lsm[-23:-4]
+        np.savetxt('/home/yingtao/Desktop/annote3D/tmp/samples' + janl_file + '.txt', samples_indiv)
+        np.savetxt('/home/yingtao/Desktop/annote3D/tmp/coords' + janl_file + '.txt', coords_indiv)
         samples.append(samples_indiv)
-        np.savetxt(mypath + 'test_files/' + str(i) + 'samples.txt', samples_indiv)
-        s = input("Do you want to stop?(y/n)")
-        if s == 'y' or 'Y':
-            break
+        np.savetxt(outputpath + 'test_files/' + str(i) + 'samples.txt', samples_indiv)
+        #s = input_with_timeout("Do you want to stop?(y/n)", 10)
+        #if s == 'y' or 'Y':
+        #    print('stop')
+        #    break
     return samples

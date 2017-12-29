@@ -1,0 +1,340 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007f907689cf4d, pid=8448, tid=140164802684672
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_66-b17) (build 1.8.0_66-b17)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.66-b17 mixed mode linux-amd64 )
+# Problematic frame:
+# C  [libc.so.6+0x39f4d]
+#
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000000003e43000):  JavaThread "AWT-XAWT" daemon [_thread_in_native, id=8716, stack(0x00007f7aa9362000,0x00007f7aa9463000)]
+
+siginfo: si_signo: 11 (SIGSEGV), si_code: 1 (SEGV_MAPERR), si_addr: 0x00000000a73999f0
+
+Registers:
+RAX=0x000000000511422f, RBX=0x0000000000000001, RCX=0x00000000a73999f0, RDX=0x00000000a2284600
+RSP=0x00007f7aa94615c0, RBP=0x00007f9076c275f8, RSI=0x0000000000000000, RDI=0x00007f7a7bfe7690
+R8 =0x0000000000000000, R9 =0x0000000000000000, R10=0x00007f7a7bfe8210, R11=0x0000000000000000
+R12=0x0000000000000001, R13=0x0000000005115400, R14=0x00007f7aa9461670, R15=0x0000000003e43000
+RIP=0x00007f907689cf4d, EFLAGS=0x0000000000010212, CSGSFS=0x0000000000000033, ERR=0x0000000000000004
+  TRAPNO=0x000000000000000e
+
+Top of Stack: (sp=0x00007f7aa94615c0)
+0x00007f7aa94615c0:   0000000000000001 0000000003af7f70
+0x00007f7aa94615d0:   0000000000000000 0000000000000001
+0x00007f7aa94615e0:   00007f7aa9461698 00007f907689d045
+0x00007f7aa94615f0:   0000000000000073 00007f9076303cf8
+0x00007f7aa9461600:   0000000003af7f70 00007f907630157d
+0x00007f7aa9461610:   0000000003af7f70 00007f90762f2ee9
+0x00007f7aa9461620:   00007f7aaa73ed38 00007f7aa9461680
+0x00007f7aa9461630:   0000000000000b18 00007f905ff5d87e
+0x00007f7aa9461640:   00007f7aa9abd030 00007f7aa9ab14d0
+0x00007f7aa9461650:   00007f7aa94616f0 00007f905fb03b56
+0x00007f7aa9461660:   ffffffffffffffff 00007f7aa9ab14d0
+0x00007f7aa9461670:   00007f7bf5e206f0 00007f7aa94616a0
+0x00007f7aa9461680:   00007f7aa94616f0 00007f905f3a6670
+0x00007f7aa9461690:   00007f905f3a6670 0000000000000001
+0x00007f7aa94616a0:   0000000003af7f70 00007f905f3a6740
+0x00007f7aa94616b0:   00007f7aa94616b0 00007f7aa9ab2837
+0x00007f7aa94616c0:   00007f7aa9461738 00007f7aa9abd030
+0x00007f7aa94616d0:   0000000000000000 00007f7aa9ab2a60
+0x00007f7aa94616e0:   00007f7aa9461698 00007f7aa9461730
+0x00007f7aa94616f0:   00007f7aa9461780 00007f905f3a6c24
+0x00007f7aa9461700:   0000000000000000 00007f7b8344ac38
+0x00007f7aa9461710:   0000000000000000 0000000000000000
+0x00007f7aa9461720:   0000000000000000 00007f7bf51fad40
+0x00007f7aa9461730:   0000000000000000 00007f7bf5380a78
+0x00007f7aa9461740:   00007f7aa9461740 00007f7aa9ab2765
+0x00007f7aa9461750:   00007f7aa9461790 00007f7aa9abd030
+0x00007f7aa9461760:   0000000000000000 00007f7aa9ab2770
+0x00007f7aa9461770:   00007f7aa9461730 00007f7aa9461790
+0x00007f7aa9461780:   00007f7aa94617d8 00007f905f3a6c69
+0x00007f7aa9461790:   00007f7bf5380a78 00007f7aa9461798
+0x00007f7aa94617a0:   00007f7afd4bf343 00007f7aa94617e8
+0x00007f7aa94617b0:   00007f7afd553228 0000000000000000 
+
+Instructions: (pc=0x00007f907689cf4d)
+0x00007f907689cf2d:   ed 74 50 49 8b 45 08 48 89 c2 48 c1 e2 05 48 85
+0x00007f907689cf3d:   c0 49 8d 4c 15 f0 74 2a 48 83 e8 01 49 89 45 08
+0x00007f907689cf4d:   48 8b 11 48 83 fa 03 0f 84 a6 00 00 00 48 83 fa
+0x00007f907689cf5d:   04 74 78 48 83 fa 02 74 4a 48 83 e9 20 48 85 c0 
+
+Register to memory mapping:
+
+RAX=0x000000000511422f is an unknown value
+RBX=0x0000000000000001 is an unknown value
+RCX=0x00000000a73999f0 is an unknown value
+RDX=0x00000000a2284600 is an unknown value
+RSP=0x00007f7aa94615c0 is pointing into the stack for thread: 0x0000000003e43000
+RBP=0x00007f9076c275f8: <offset 0x3c45f8> in /lib/x86_64-linux-gnu/libc.so.6 at 0x00007f9076863000
+RSI=0x0000000000000000 is an unknown value
+RDI=0x00007f7a7bfe7690: _ZN2H59DataSpace3ALLE+0 in /home/yingtao/Desktop/Fiji.app/lib/linux64/libSimpleITKJava.so at 0x00007f7a6ccad000
+R8 =0x0000000000000000 is an unknown value
+R9 =0x0000000000000000 is an unknown value
+R10=0x00007f7a7bfe8210: <offset 0xf33b210> in /home/yingtao/Desktop/Fiji.app/lib/linux64/libSimpleITKJava.so at 0x00007f7a6ccad000
+R11=0x0000000000000000 is an unknown value
+R12=0x0000000000000001 is an unknown value
+R13=0x0000000005115400 is an unknown value
+R14=0x00007f7aa9461670 is pointing into the stack for thread: 0x0000000003e43000
+R15=0x0000000003e43000 is a thread
+
+
+Stack: [0x00007f7aa9362000,0x00007f7aa9463000],  sp=0x00007f7aa94615c0,  free space=1021k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libc.so.6+0x39f4d]
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+J 3349  sun.awt.X11.XlibWrapper.XEventsQueued(JI)I (0 bytes) @ 0x00007f905ff5d804 [0x00007f905ff5d7c0+0x44]
+j  sun.awt.X11.XToolkit.run(Z)V+63
+j  sun.awt.X11.XToolkit.run()V+5
+j  java.lang.Thread.run()V+11
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00007f7a7c217000 JavaThread "XToolkt-Shutdown-Thread" [_thread_blocked, id=13576, stack(0x00007f7a5f88f000,0x00007f7a5f990000)]
+  0x00007f7a7c211000 JavaThread "Thread-1" [_thread_blocked, id=13574, stack(0x00007f7a805e6000,0x00007f7a806e7000)]
+  0x00007f7adc001000 JavaThread "SIGINT handler" daemon [_thread_blocked, id=13573, stack(0x00007f7aa895e000,0x00007f7aa8a5f000)]
+  0x0000000004991800 JavaThread "zSelector" [_thread_blocked, id=9053, stack(0x00007f7a804e5000,0x00007f7a805e6000)]
+  0x0000000004b74000 JavaThread "AWT-EventQueue-0" [_thread_blocked, id=9045, stack(0x00007f7a808e7000,0x00007f7a809e8000)]
+  0x0000000004b73800 JavaThread "AWT-Shutdown" [_thread_blocked, id=9044, stack(0x00007f7aa8041000,0x00007f7aa8142000)]
+  0x00000000051a7000 JavaThread "GC Daemon" daemon [_thread_blocked, id=8784, stack(0x00007f7aa8f60000,0x00007f7aa9061000)]
+  0x00000000051a5800 JavaThread "RMI RenewClean-[127.0.1.1:32903]" daemon [_thread_blocked, id=8783, stack(0x00007f7aa9061000,0x00007f7aa9162000)]
+=>0x0000000003e43000 JavaThread "AWT-XAWT" daemon [_thread_in_native, id=8716, stack(0x00007f7aa9362000,0x00007f7aa9463000)]
+  0x0000000003b1e800 JavaThread "Java2D Disposer" daemon [_thread_blocked, id=8715, stack(0x00007f7aa9463000,0x00007f7aa9564000)]
+  0x000000000270e000 JavaThread "Service Thread" daemon [_thread_blocked, id=8506, stack(0x00007f7aabcfd000,0x00007f7aabdfe000)]
+  0x0000000002709000 JavaThread "C1 CompilerThread14" daemon [_thread_in_vm_trans, id=8505, stack(0x00007f7aabdfe000,0x00007f7aabeff000)]
+  0x0000000002707000 JavaThread "C1 CompilerThread13" daemon [_thread_blocked, id=8504, stack(0x00007f7aabeff000,0x00007f7aac000000)]
+  0x0000000002705000 JavaThread "C1 CompilerThread12" daemon [_thread_blocked, id=8503, stack(0x00007f7afc02a000,0x00007f7afc12b000)]
+  0x0000000002703000 JavaThread "C1 CompilerThread11" daemon [_thread_blocked, id=8502, stack(0x00007f7afc12b000,0x00007f7afc22c000)]
+  0x0000000002700800 JavaThread "C1 CompilerThread10" daemon [_thread_blocked, id=8501, stack(0x00007f7afc22c000,0x00007f7afc32d000)]
+  0x00000000026ff000 JavaThread "C2 CompilerThread9" daemon [_thread_blocked, id=8500, stack(0x00007f7afc32d000,0x00007f7afc42e000)]
+  0x00000000026fc000 JavaThread "C2 CompilerThread8" daemon [_thread_blocked, id=8499, stack(0x00007f7afc42e000,0x00007f7afc52f000)]
+  0x00000000026fa000 JavaThread "C2 CompilerThread7" daemon [_thread_blocked, id=8498, stack(0x00007f7afc52f000,0x00007f7afc630000)]
+  0x00000000026f7800 JavaThread "C2 CompilerThread6" daemon [_thread_blocked, id=8497, stack(0x00007f7afc630000,0x00007f7afc731000)]
+  0x00000000026f5800 JavaThread "C2 CompilerThread5" daemon [_thread_blocked, id=8496, stack(0x00007f7afc731000,0x00007f7afc832000)]
+  0x00000000026f3800 JavaThread "C2 CompilerThread4" daemon [_thread_blocked, id=8495, stack(0x00007f7afc832000,0x00007f7afc933000)]
+  0x00000000026e9000 JavaThread "C2 CompilerThread3" daemon [_thread_blocked, id=8494, stack(0x00007f7afc933000,0x00007f7afca34000)]
+  0x00000000026e7000 JavaThread "C2 CompilerThread2" daemon [_thread_blocked, id=8493, stack(0x00007f7afca34000,0x00007f7afcb35000)]
+  0x00000000026e5000 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=8492, stack(0x00007f7afcb35000,0x00007f7afcc36000)]
+  0x00000000026e3000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=8491, stack(0x00007f7afcc36000,0x00007f7afcd37000)]
+  0x00000000026e0800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=8490, stack(0x00007f7afcd37000,0x00007f7afce38000)]
+  0x00000000026df800 JavaThread "Surrogate Locker Thread (Concurrent GC)" daemon [_thread_blocked, id=8489, stack(0x00007f7afce38000,0x00007f7afcf39000)]
+  0x00000000026a8800 JavaThread "Finalizer" daemon [_thread_blocked, id=8488, stack(0x00007f7afcf39000,0x00007f7afd03a000)]
+  0x00000000026a6800 JavaThread "Reference Handler" daemon [_thread_blocked, id=8487, stack(0x00007f7afd03a000,0x00007f7afd13b000)]
+  0x00000000024d7000 JavaThread "Run$_mainMacro$" [_thread_blocked, id=8448, stack(0x00007fff0e10f000,0x00007fff0e20f000)]
+
+Other Threads:
+  0x00000000026a1800 VMThread [stack: 0x00007f7afd13b000,0x00007f7afd23c000] [id=8486]
+  0x0000000002710800 WatcherThread [stack: 0x00007f7aabbfc000,0x00007f7aabcfd000] [id=8507]
+
+VM state:synchronizing (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00000000024d3240] Safepoint_lock - owner thread: 0x00000000026a1800
+[0x00000000024d32c0] Threads_lock - owner thread: 0x00000000026a1800
+
+Heap:
+ par new generation   total 629248K, used 158962K [0x00007f7b7c800000, 0x00007f7ba72c0000, 0x00007f7bf4190000)
+  eden space 559360K,  28% used [0x00007f7b7c800000, 0x00007f7b8633cad8, 0x00007f7b9ea40000)
+  from space 69888K,   0% used [0x00007f7b9ea40000, 0x00007f7b9ea40000, 0x00007f7ba2e80000)
+  to   space 69888K,   0% used [0x00007f7ba2e80000, 0x00007f7ba2e80000, 0x00007f7ba72c0000)
+ concurrent mark-sweep generation total 1398144K, used 29974K [0x00007f7bf4190000, 0x00007f7c496f0000, 0x00007f9000000000)
+ Metaspace       used 42483K, capacity 42862K, committed 43148K, reserved 45056K
+
+Card table byte_map: [0x00007f7b723e3000,0x00007f7b7c800000] byte_map_base: 0x00007f3bb47ff000
+
+Marking Bits: (CMSBitMap*) 0x0000000002619f88
+ Bits: [0x00007f7b18089000, 0x00007f7b68382c00)
+
+Mod Union Table: (CMSBitMap*) 0x000000000261a048
+ Bits: [0x00007f7b16c7d000, 0x00007f7b18088e70)
+
+Polling page: 0x00007f9077269000
+
+CodeCache: size=245760Kb used=12680Kb max_used=12680Kb free=233079Kb
+ bounds [0x00007f905f39f000, 0x00007f906001f000, 0x00007f906e39f000]
+ total_blobs=3625 nmethods=2986 adapters=547
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 577.625 Thread 0x0000000002709000 nmethod 3710 0x00007f905ffe5e90 code [0x00007f905ffe6020, 0x00007f905ffe6408]
+Event: 577.625 Thread 0x0000000002707000 nmethod 3712 0x00007f905ffe5950 code [0x00007f905ffe5ae0, 0x00007f905ffe5d48]
+Event: 577.625 Thread 0x0000000002707000 3715       3       java.util.prefs.FileSystemPreferences::syncSpiPrivileged (178 bytes)
+Event: 577.625 Thread 0x0000000002703000 nmethod 3714 0x00007f905ffe55d0 code [0x00007f905ffe5740, 0x00007f905ffe58a8]
+Event: 577.625 Thread 0x0000000002705000 nmethod 3709 0x00007f905ffe9890 code [0x00007f905ffe9a80, 0x00007f905ffea388]
+Event: 577.626 Thread 0x0000000002707000 nmethod 3715 0x00007f905fffe350 code [0x00007f905fffe680, 0x00007f905ffffe18]
+Event: 735.906 Thread 0x00000000026ff000 3716       4       sun.util.logging.PlatformLogger::isLoggable (38 bytes)
+Event: 735.915 Thread 0x00000000026ff000 nmethod 3716 0x00007f905ffe7e90 code [0x00007f905ffe8000, 0x00007f905ffe8138]
+Event: 868.051 Thread 0x00000000026fc000 3717       4       sun.awt.X11.XToolkit::getDisplay (20 bytes)
+Event: 868.051 Thread 0x00000000026fc000 nmethod 3717 0x00007f905f6e5ed0 code [0x00007f905f6e6000, 0x00007f905f6e6038]
+
+GC Heap History (4 events):
+Event: 6.868 GC heap before
+{Heap before GC invocations=0 (full 0):
+ par new generation   total 629120K, used 559232K [0x00007f7b7c800000, 0x00007f7ba72a0000, 0x00007f7bf4190000)
+  eden space 559232K, 100% used [0x00007f7b7c800000, 0x00007f7b9ea20000, 0x00007f7b9ea20000)
+  from space 69888K,   0% used [0x00007f7b9ea20000, 0x00007f7b9ea20000, 0x00007f7ba2e60000)
+  to   space 69888K,   0% used [0x00007f7ba2e60000, 0x00007f7ba2e60000, 0x00007f7ba72a0000)
+ concurrent mark-sweep generation total 1398144K, used 0K [0x00007f7bf4190000, 0x00007f7c496f0000, 0x00007f9000000000)
+ Metaspace       used 21487K, capacity 21805K, committed 21884K, reserved 22528K
+Event: 7.007 GC heap after
+Heap after GC invocations=1 (full 0):
+ par new generation   total 629120K, used 24524K [0x00007f7b7c800000, 0x00007f7ba72a0000, 0x00007f7bf4190000)
+  eden space 559232K,   0% used [0x00007f7b7c800000, 0x00007f7b7c800000, 0x00007f7b9ea20000)
+  from space 69888K,  35% used [0x00007f7ba2e60000, 0x00007f7ba46530c8, 0x00007f7ba72a0000)
+  to   space 69888K,   0% used [0x00007f7b9ea20000, 0x00007f7b9ea20000, 0x00007f7ba2e60000)
+ concurrent mark-sweep generation total 1398144K, used 0K [0x00007f7bf4190000, 0x00007f7c496f0000, 0x00007f9000000000)
+ Metaspace       used 21487K, capacity 21805K, committed 21884K, reserved 22528K
+}
+Event: 9.014 GC heap before
+{Heap before GC invocations=1 (full 0):
+ par new generation   total 629120K, used 206172K [0x00007f7b7c800000, 0x00007f7ba72a0000, 0x00007f7bf4190000)
+  eden space 559232K,  32% used [0x00007f7b7c800000, 0x00007f7b87963fe0, 0x00007f7b9ea20000)
+  from space 69888K,  35% used [0x00007f7ba2e60000, 0x00007f7ba46530c8, 0x00007f7ba72a0000)
+  to   space 69888K,   0% used [0x00007f7b9ea20000, 0x00007f7b9ea20000, 0x00007f7ba2e60000)
+ concurrent mark-sweep generation total 1398144K, used 0K [0x00007f7bf4190000, 0x00007f7c496f0000, 0x00007f9000000000)
+ Metaspace       used 37088K, capacity 37525K, committed 37820K, reserved 38912K
+Event: 17.038 GC heap after
+Heap after GC invocations=2 (full 1):
+ par new generation   total 629248K, used 0K [0x00007f7b7c800000, 0x00007f7ba72c0000, 0x00007f7bf4190000)
+  eden space 559360K,   0% used [0x00007f7b7c800000, 0x00007f7b7c800000, 0x00007f7b9ea40000)
+  from space 69888K,   0% used [0x00007f7b9ea40000, 0x00007f7b9ea40000, 0x00007f7ba2e80000)
+  to   space 69888K,   0% used [0x00007f7ba2e80000, 0x00007f7ba2e80000, 0x00007f7ba72c0000)
+ concurrent mark-sweep generation total 1398144K, used 29974K [0x00007f7bf4190000, 0x00007f7c496f0000, 0x00007f9000000000)
+ Metaspace       used 37088K, capacity 37525K, committed 37820K, reserved 38912K
+}
+
+Deoptimization events (10 events):
+Event: 17.670 Thread 0x00000000024d7000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f905f88a73c method=java.lang.StringCoding$StringEncoder.encode([CII)[B @ 30
+Event: 17.715 Thread 0x0000000004b74000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f905f7fb244 method=java.lang.ref.SoftReference.get()Ljava/lang/Object; @ 6
+Event: 17.720 Thread 0x0000000004b74000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f905fad5cf8 method=java.lang.StringCoding$StringDecoder.decode([BII)[C @ 33
+Event: 17.721 Thread 0x0000000004b74000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f905fbddae8 method=java.lang.StringCoding.safeTrim([CILjava/nio/charset/Charset;Z)[C @ 3
+Event: 17.788 Thread 0x0000000004b74000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f905fefc928 method=ij.process.ShortProcessor.create8BitImage()[B @ 56
+Event: 17.922 Thread 0x0000000004b74000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f905fd12360 method=java.util.LinkedHashMap.afterNodeInsertion(Z)V @ 18
+Event: 17.948 Thread 0x0000000004b74000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f905fe74f40 method=java.nio.Buffer.nextGetIndex()I @ 8
+Event: 17.958 Thread 0x0000000004b74000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f905ffa7308 method=java.nio.Buffer.nextGetIndex()I @ 8
+Event: 18.029 Thread 0x0000000004b74000 Uncommon trap: reason=unloaded action=reinterpret pc=0x00007f905f8ef090 method=java.lang.CharacterData.of(I)Ljava/lang/CharacterData; @ 96
+Event: 18.029 Thread 0x0000000004b74000 Uncommon trap: reason=unloaded action=reinterpret pc=0x00007f905f8c37e8 method=java.lang.CharacterData.of(I)Ljava/lang/CharacterData; @ 96
+
+Internal exceptions (10 events):
+Event: 18.059 Thread 0x0000000004b74000 Exception <a 'java/lang/UnsupportedOperationException': > (0x00007f7b84e099b8) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u66/4988/hotspot/src/share/vm/prims/jni.cpp, line 735]
+Event: 18.067 Thread 0x00000000051a5800 Exception <a 'java/net/ConnectException'> (0x00007f7b7d785dd0) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u66/4988/hotspot/src/share/vm/prims/jni.cpp, line 709]
+Event: 20.069 Thread 0x00000000051a5800 Exception <a 'java/net/ConnectException'> (0x00007f7b7d787248) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u66/4988/hotspot/src/share/vm/prims/jni.cpp, line 709]
+Event: 24.071 Thread 0x00000000051a5800 Exception <a 'java/net/ConnectException'> (0x00007f7b7d7886c0) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u66/4988/hotspot/src/share/vm/prims/jni.cpp, line 709]
+Event: 32.072 Thread 0x00000000051a5800 Exception <a 'java/net/ConnectException'> (0x00007f7b7d789b38) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u66/4988/hotspot/src/share/vm/prims/jni.cpp, line 709]
+Event: 48.074 Thread 0x00000000051a5800 Exception <a 'java/net/ConnectException'> (0x00007f7b7d78afb0) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u66/4988/hotspot/src/share/vm/prims/jni.cpp, line 709]
+Event: 80.076 Thread 0x00000000051a5800 Exception <a 'java/net/ConnectException'> (0x00007f7b7d78c428) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u66/4988/hotspot/src/share/vm/prims/jni.cpp, line 709]
+Event: 144.077 Thread 0x00000000051a5800 Exception <a 'java/net/ConnectException'> (0x00007f7b7d78d8a0) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u66/4988/hotspot/src/share/vm/prims/jni.cpp, line 709]
+Event: 272.079 Thread 0x00000000051a5800 Exception <a 'java/net/ConnectException'> (0x00007f7b7d78ed18) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u66/4988/hotspot/src/share/vm/prims/jni.cpp, line 709]
+Event: 528.081 Thread 0x00000000051a5800 Exception <a 'java/net/ConnectException'> (0x00007f7b7d790190) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u66/4988/hotspot/src/share/vm/prims/jni.cpp, line 709]
+
+Events (10 events):
+Event: 68.994 Thread 0x0000000004c95000 Thread exited: 0x0000000004c95000
+Event: 1089.371 loading class sun/misc/Signal$1
+Event: 1089.371 loading class sun/misc/Signal$1 done
+Event: 1089.372 Thread 0x00007f7adc001000 Thread added: 0x00007f7adc001000
+Event: 1089.372 Executing VM operation: RevokeBias
+Event: 1089.372 Executing VM operation: RevokeBias done
+Event: 1089.372 loading class java/util/IdentityHashMap$KeyIterator
+Event: 1089.372 loading class java/util/IdentityHashMap$KeyIterator done
+Event: 1089.373 Thread 0x00007f7a7c211000 Thread added: 0x00007f7a7c211000
+Event: 1089.373 Executing VM operation: RevokeBias
+
+
+Dynamic libraries:
+00400000-00411000 r-xp 00000000 08:02 28974225                           /home/yingtao/Desktop/Fiji.app/ImageJ-linux64
+00611000-00612000 r--p 00011000 08:02 28974225                           /home/yingtao/Desktop/Fiji.app/ImageJ-linux64
+00612000-00613000 rw-p 00012000 08:02 28974225                           /home/yingtao/Desktop/Fiji.app/ImageJ-linux64
+00613000-00615000 rw-p 00000000 00:00 0 
+024bb000-051b8000 rw-p 00000000 00:00 0                                  [heap]
+7f7a54000000-7f7a54021000 rw-p 00000000 00:00 0 
+7f7a54021000-7f7a58000000 ---p 00000000 00:00 0 
+7f7a58000000-7f7a58021000 rw-p 00000000 00:00 0 
+7f7a58021000-7f7a5c000000 ---p 00000000 00:00 0 
+7f7a5f88f000-7f7a5f892000 ---p 00000000 00:00 0 
+7f7a5f892000-7f7a5f990000 rw-p 00000000 00:00 0 
+7f7a5f990000-7f7a5f993000 ---p 00000000 00:00 0 
+7f7a5f993000-7f7a5fa91000 rw-p 00000000 00:00 0 
+7f7a5fa91000-7f7a5faa1000 r--s 00000000 08:02 25037559                   /usr/share/texlive/texmf-dist/fonts/type1/adobe/courier/pcrr8a.pfb
+7f7a5faa1000-7f7a5faa8000 r--s 00000000 08:02 29100668                   /var/cache/fontconfig/4be9850f182b35c1350b6bbf2e42601c-le64.cache-6
+7f7a5faa8000-7f7a5faaa000 r--s 00000000 08:02 29100667                   /var/cache/fontconfig/30a99c4256905863f7aa12b5e873c27c-le64.cache-6
+7f7a5faaa000-7f7a5faab000 r--s 00000000 08:02 29100666                   /var/cache/fontconfig/087e1975ba9a574b140bb1df193bf770-le64.cache-6
+7f7a5faab000-7f7a5faaf000 r--s 00000000 08:02 29112307                   /var/cache/fontconfig/6aa41aa22e18b8fa06a12da28ea9c28b-le64.cache-6
+7f7a5faaf000-7f7a5faba000 r--s 00000000 08:02 29107758                   /var/cache/fontconfig/945677eb7aeaf62f1d50efc3fb3ec7d8-le64.cache-6
+7f7a5faba000-7f7a5fac3000 r--s 00000000 08:02 29111718                   /var/cache/fontconfig/a6d8cf8e4ec09cdbc8633c31745a07dd-le64.cache-6
+7f7a5fac3000-7f7a5fac9000 r--s 00000000 08:02 29109028                   /var/cache/fontconfig/2cd17615ca594fa2959ae173292e504c-le64.cache-6
+7f7a5fac9000-7f7a5faca000 r--s 00000000 08:02 29109027                   /var/cache/fontconfig/0d8c3b2ac0904cb8a57a757ad11a4a08-le64.cache-6
+7f7a5faca000-7f7a5face000 r--s 00000000 08:02 29109026                   /var/cache/fontconfig/de156ccd2eddbdc19d37a45b8b2aac9c-le64.cache-6
+7f7a5face000-7f7a5fae3000 r--s 00000000 08:02 29109019                   /var/cache/fontconfig/04aabc0a78ac019cf9454389977116d2-le64.cache-6
+7f7a5fae3000-7f7a5fae4000 r--s 00000000 08:02 29109008                   /var/cache/fontconfig/1ac9eb803944fde146138c791f5cc56a-le64.cache-6
+7f7a5fae4000-7f7a5fae9000 r--s 00000000 08:02 29109605                   /var/cache/fontconfig/eb48934c523a49add3824bfad8846c40-le64.cache-6
+7f7a5fae9000-7f7a5faee000 r--s 00000000 08:02 29109604                   /var/cache/fontconfig/385c0604a188198f04d133e54aba7fe7-le64.cache-6
+7f7a5faee000-7f7a5faef000 r--s 00000000 08:02 29100665                   /var/cache/fontconfig/9c956a7723ca69a44b382d9179c9802f-le64.cache-6
+7f7a5faef000-7f7a5faf0000 r--s 00000000 08:02 29109006                   /var/cache/fontconfig/dc05db6664285cc2f12bf69c139ae4c3-le64.cache-6
+7f7a5faf0000-7f7a5faf3000 r--s 00000000 08:02 29108998                   /var/cache/fontconfig/767a8244fc0220cfb567a839d0392e0b-le64.cache-6
+7f7a5faf3000-7f7a5faf4000 r--s 00000000 08:02 29106339                   /var/cache/fontconfig/4794a0821666d79190d59a36cb4f44b5-le64.cache-6
+7f7a5faf4000-7f7a5faf5000 r--s 00000000 08:02 29100597                   /var/cache/fontconfig/9eae20f1ff8cc0a7d125749e875856bd-le64.cache-6
+7f7a5faf5000-7f7a5faf8000 r--s 00000000 08:02 29100596                   /var/cache/fontconfig/bf2c1853a9e9b00bb02fe2e9bcf1e201-le64.cache-6
+7f7a5faf8000-7f7a5fafe000 r--s 00000000 08:02 29111717                   /var/cache/fontconfig/8801497958630a81b71ace7c5f9b32a8-le64.cache-6
+7f7a5fafe000-7f7a5fb39000 r--s 00000000 08:02 29098619                   /var/cache/fontconfig/365b55f210c0a22e9a19e35191240f32-le64.cache-6
+7f7a5fb39000-7f7a5fb3d000 r--s 00000000 08:02 29108990                   /var/cache/fontconfig/c57959a16110560c8d0fcea73374aeeb-le64.cache-6
+7f7a5fb3d000-7f7a5fb3e000 r--s 00000000 08:02 29108989                   /var/cache/fontconfig/bab58bb527bb656aaa9f116d68a48d89-le64.cache-6
+7f7a5fb3e000-7f7a5fb45000 r--s 00000000 08:02 29108987                   /var/cache/fontconfig/3047814df9a2f067bd2d96a2b9c36e5a-le64.cache-6
+7f7a5fb45000-7f7a5fb4d000 r--s 00000000 08:02 29109367                   /var/cache/fontconfig/bf3b770c553c462765856025a94f1ce6-le64.cache-6
+7f7a5fb4d000-7f7a5fb4e000 r--s 00000000 08:02 29108984                   /var/cache/fontconfig/56cf4f4769d0f4abc89a4895d7bd3ae1-le64.cache-6
+7f7a5fb4e000-7f7a5fb4f000 r--s 00000000 08:02 29108981                   /var/cache/fontconfig/b9d506c9ac06c20b433354fa67a72993-le64.cache-6
+7f7a5fb4f000-7f7a5fb55000 r--s 00000000 08:02 29108959                   /var/cache/fontconfig/b47c4e1ecd0709278f4910c18777a504-le64.cache-6
+7f7a5fb55000-7f7a5fb58000 r--s 00000000 08:02 29100595                   /var/cache/fontconfig/14d493b97896515cad3840ba4896e372-le64.cache-6
+7f7a5fb58000-7f7a5fb5b000 r--s 00000000 08:02 29100594                   /var/cache/fontconfig/e49e89034d371f0f9de17aab02136486-le64.cache-6
+7f7a5fb5b000-7f7a5fb5d000 r--s 00000000 08:02 29100593                   /var/cache/fontconfig/4b14b093aebc79c320de5e86ae1d3314-le64.cache-6
+7f7a5fb5d000-7f7a5fb70000 r--s 00000000 08:02 29108957                   /var/cache/fontconfig/d52a8644073d54c13679302ca1180695-le64.cache-6
+7f7a5fb70000-7f7a5fb71000 r--s 00000000 08:02 29108949                   /var/cache/fontconfig/551ecf3b0e8b0bca0f25c0944f561853-le64.cache-6
+7f7a5fb71000-7f7a5fb72000 r--s 00000000 08:02 29100586                   /var/cache/fontconfig/8a687c406b77f27d99abfeeba937fcce-le64.cache-6
+7f7a5fb72000-7f7a5fb77000 r--s 00000000 08:02 29100585                   /var/cache/fontconfig/75ad6aa2358a85f0de2c8ee4837e8227-le64.cache-6
+7f7a5fb77000-7f7a5fb79000 r--s 00000000 08:02 29100584                   /var/cache/fontconfig/65f976e5259cbe6dc7697b8648396239-le64.cache-6
+7f7a5fb79000-7f7a5fb84000 r--s 00000000 08:02 29108945                   /var/cache/fontconfig/d589a48862398ed80a3d6066f4f56f4c-le64.cache-6
+7f7a5fb84000-7f7a5fb88000 r--s 00000000 08:02 29110535                   /var/cache/fontconfig/246184dc75a16901ca37d96895904249-le64.cache-6
+7f7a5fb88000-7f7a5fb89000 r--s 00000000 08:02 29100583                   /var/cache/fontconfig/94f7fe9bd33aadfac165873bd010d595-le64.cache-6
+7f7a5fb89000-7f7a5fb8b000 r--s 00000000 08:02 29100582                   /var/cache/fontconfig/423767150eb258c59035de29db6fca84-le64.cache-6
+7f7a5fb8b000-7f7a5fb9a000 r--s 00000000 08:02 29099537                   /var/cache/fontconfig/076844891e283c872cf364b1a1a8a9a6-le64.cache-6
+7f7a5fb9a000-7f7a5fb9b000 r--s 00000000 08:02 29100579                   /var/cache/fontconfig/406a1d2d2bf3ed7664fbadefac0b2f66-le64.cache-6
+7f7a5fb9b000-7f7a5fb9d000 r--s 00000000 08:02 29100578                   /var/cache/fontconfig/67709b7835c0f764c1135060c9575660-le64.cache-6
+7f7a5fb9d000-7f7a5fb9e000 r--s 00000000 08:02 29108943                   /var/cache/fontconfig/30829fa25452a46451e813d634d7f916-le64.cache-6
+7f7a5fb9e000-7f7a5fbac000 r--s 00000000 08:02 29100577                   /var/cache/fontconfig/198d8fcf01c96d0cf813f74fd759bdb7-le64.cache-6
+7f7a5fbac000-7f7a5fbaf000 r--s 00000000 08:02 29108894                   /var/cache/fontconfig/75114ca45c98e8a441da0ff356701271-le64.cache-6
+7f7a5fbaf000-7f7a5fbc1000 r--s 00000000 08:02 29108885                   /var/cache/fontconfig/9b89f8e3dae116d678bbf48e5f21f69b-le64.cache-6
+7f7a5fbcb000-7f7a5fbd4000 r--s 00000000 08:02 25037573                   /usr/share/texlive/texmf-dist/fonts/type1/bitstrea/charter/bchbi8a.pfb
+7f7a5fbd4000-7f7a5fbdd000 r--s 00000000 08:02 25037552                   /usr/share/texlive/texmf-dist/fonts/type1/adobe/utopia/putr8a.pfb
+7f7a5fbdd000-7f7a5fbe6000 r--s 00000000 08:02 25037575                   /usr/share/texlive/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb
+7f7a5fbe6000-7f7a5fbf6000 r--s 00000000 08:02 25037558                   /usr/share/texlive/texmf-dist/fonts/type1/adobe/courier/pcrb8a.pfb
+7f7a5fbf6000-7f7a5fc05000 r--s 00000000 08:02 25037556                   /usr/share/texlive/texmf-dist/fonts/type1/adobe/courier/pcrro8a.pfb
+7f7a5fc05000-7f7a5fc15000 r--s 00000000 08:02 25037561                   /usr/share/texlive/texmf-dist/fonts/type1/adobe/courier/pcrbo8a.pfb
+7f7a5fc15000-7f7a5fc1f000 r--s 00000000 08:02 25037554                   /usr/share/texlive/texmf-dist/fonts/type1/adobe/utopia/putbi8a.pfb
+7f7a5fc1f000-7f7a5fc28000 r--s 00000000 08:02 25037572                   /usr/share/texlive/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb
+7f7a5fc28000-7f7a5fc31000 r--s 00000000 08:02 25037553                   /usr/share/texlive/texmf-dist/fonts/type1/adobe/utopia/putb8a.pfb
+7f7a5fc31000-7f7a5fc3b000 r--s 00000000 08:02 25037551                   /usr/share/texlive/texmf-dist/fonts/type1/adobe/utopia/putri8a.pfb
+7f7a5fc3b000-7f7a5fc44000 r--s 00000000 08:02 25037576                   /usr/share/texlive/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb
+7f7a5fc44000-7f7a5fc56000 r--s 00000000 08:02 22676612                   /usr/share/fonts/type1/gsfonts/b018035l.pfb
+7f7a5fc56000-7f7a5fc71000 r--s 00000000 08:02 22676678                   /usr/share/fonts/type1/gsfonts/p052003l.pfb
+7f7a5fc71000-7f7a5fc8b000 r--s 00000000 08:02 22676615                   /usr/share/fonts/type1/gsfonts/c059013l.pfb
+7f7a5fc8b000-7f7a5fc9b000 r--s 00000000 08:02 22676594                   /usr/share/fonts/type1/gsfonts/a010015l.pfb
+7f7a5fc9b000-7f7a5fcb0000 r--s 00000000 08:02 22676609                   /usr/share/fonts/type1/gsfonts/b018032l.pfb
+7f7a5fcb0000-7f7a5fcc2000 r--s 00000000 08:02 22676645                   /usr/share/fonts/type1/gsfonts/n019044l.pfb
+7f7a5fcc2000-7f7a5fcd9000 r--s 00000000 08:02 22676693                   /usr/share/fonts/type1/gsfonts/z003034l.pfb
+7f7a5fcd9000-7f7a5fcf1000 r--s 00000000 08:02 22676624                   /usr/share/fonts/type1/gsfonts/c059036l.pfb
+7f7a5fcf1000-7f7a5fd01000 r--s 00000000 08:02 22676597                   /usr/share/fonts/type1/gsfonts/a010033l.pfb
+7f7a5fd01000-7f7a5fd1c000 r--s 00000000 08:02 22676681                   /usr/share/fonts/type1/gsfonts/p052004l.pfb
+7f7a5fd1c000-7f7a5fd2f000 r--s 00000000 08:02 22676651                   /usr/share/fonts/type1/gsfonts
